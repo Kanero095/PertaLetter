@@ -18,5 +18,4 @@ Route::middleware([
     Route::get('/dashboard', [DefaultController::class,'dashboard'])->name('dashboard');
     Route::get('/surat-masuk', [DefaultController::class,'suratmasuk'])->name('suratmasuk');
     Route::get('/surat-keluar', [DefaultController::class,'suratkeluar'])->name('suratkeluar');
-
 });
