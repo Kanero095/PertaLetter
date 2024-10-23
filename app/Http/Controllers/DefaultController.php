@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
 
 class DefaultController extends Controller
@@ -13,7 +14,8 @@ class DefaultController extends Controller
 
     public function suratmasuk()
     {
-        return view('surat-masuk');
+        $suratmasuk = SuratMasuk::all();
+        return view('surat-masuk',['suratmasuk' => $suratmasuk]);
     }
 
     public function suratkeluar()
