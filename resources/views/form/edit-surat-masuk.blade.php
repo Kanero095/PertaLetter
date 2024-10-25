@@ -66,7 +66,7 @@
                     class="peer-focus:font-medium absolute text-sm text-black dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">File
                     Surat Masuk</label>
             </div>
-            <!-- Menampilkan link atau pratinjau file PDF jika file tersedia -->
+
             @if ($filePath)
                 <div class="mt-4">
                     <label for="existingFile" class="block text-sm font-medium text-gray-700">File Surat Masuk Saat
@@ -75,12 +75,13 @@
                         class="text-blue-600 hover:underline">Lihat File PDF</a>
 
                     <!-- Jika ingin pratinjau file PDF langsung -->
-                    <iframe src="{{ route('pdf.show', $suratmasuk->id) }}" width="100%" height="500px"></iframe>
+                    <iframe src="{{ route('pdf.show', $suratmasuk->id) }}" width="100%" height="500px"
+                        class="rounded"></iframe>
                 </div>
             @else
                 <p class="text-red-600">File tidak ditemukan</p>
             @endif
-            <div>
+            <div class="my-3">
                 <button type="submit"
                     class="bg-lime-500 px-3 h-8 rounded-lg text-white font-semibold drop-shadow hover:bg-lime-800">Simpan
                     Data</button>

@@ -4,6 +4,7 @@ use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\SuratMasukController;
 use Illuminate\Support\Facades\Route;
 
+Route::redirect('/home', '/dashboard');
 Route::redirect('/','/login');
 Route::redirect('/register','');
 
@@ -18,11 +19,13 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', [DefaultController::class,'dashboard'])->name('dashboard');
     Route::get('/surat-masuk', [DefaultController::class,'suratmasuk'])->name('suratmasuk');
-    Route::post('/surat-masuk/{id}',[SuratMasukController::class, 'DeleteSuratMasuk'])->name('DeleteSuratMasuk');
+    Route::post('/surat-masuk/{slug}',[SuratMasukController::class, 'DeleteSuratMasuk'])->name('DeleteSuratMasuk');
 
-    Route::get('/surat-masuk/{id}/edit',[SuratMasukController::class, 'editSuratMasuk'])->name('EditSuratMasuk');
-    Route::post('/surat-masuk/{id}/edit',[SuratMasukController::class, 'updateSuratMasuk'])->name('updateSuratMasuk');
-    Route::get('/suratmasuk/pdf/{id}', [SuratMasukController::class, 'showPDF'])->name('pdf.show');
+    Route::get('/surat-masuk/edit/{slug}/',[SuratMasukController::class, 'editSuratMasuk'])->name('EditSuratMasuk');
+    Route::post('/surat-masuk/edit/{slug}/',[SuratMasukController::class, 'updateSuratMasuk'])->name('updateSuratMasuk');
+    Route::get('/suratmasuk/pdf/{slug}', [SuratMasukController::class, 'showPDF'])->name('pdf.show');
+
+    Route::get('/surat-masuk/view/{slug}', [SuratMasukController::class,'viewSuratMasuk'])->name('viewSuratMasuk');
 
     Route::get('/surat-keluar', [DefaultController::class,'suratkeluar'])->name('suratkeluar');
 

@@ -12,7 +12,9 @@ class SuratMasuk extends Model
     protected $fillable = [
         'asalSuratMasuk',
         'noSurat',
+        'tipeSurat',
         'perihal',
+        'slug',
         'isiRingkas',
         'tglSuratMasuk',
         'fileSuratMasuk',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SuratMasukController extends Controller
 {
@@ -31,6 +32,13 @@ class SuratMasukController extends Controller
         $suratmasuk->isiRingkas = $request->isiRingkas;
         $suratmasuk->tglSuratMasuk = $request->tglSuratMasuk;
 
+        $slug = Str::slug($request->noSurat . '-' . $request->perihal);
+
+        $count = SuratMasuk::where('slug', 'LIKE', "{$slug}%")->count();
+        $slug = $count ? "{$slug}-{$count}" : $slug;
+
+        $suratmasuk->slug = $slug;
+
         $fileName = 'Berkas_' . $request->asalSuratMasuk . '_' . $request->tglSuratMasuk . '.pdf';
         $filePath = $request->file('fileSuratMasuk')->storeAs('Surat-Masuk/' . $request->tglSuratMasuk, $fileName);
 
@@ -39,42 +47,53 @@ class SuratMasukController extends Controller
         return redirect('/surat-masuk')->with('success', 'Surat Masuk berhasil ditambahkan');
     }
 
-    public function DeleteSuratMasuk($id)
+    public function DeleteSuratMasuk($slug)
     {
-        $suratmasuk = SuratMasuk::find($id)->delete();
+        $suratmasuk = SuratMasuk::where('slug', $slug)->delete();
         return back()->with('success', 'Surat Masuk berhasil dihapus');
     }
 
-    public function editSuratMasuk($id)
-{
-    $suratmasuk = SuratMasuk::find($id);
+    public function editSuratMasuk($slug)
+    {
+        $suratmasuk = SuratMasuk::where('slug', $slug)->firstOrFail();
 
-    if (!$suratmasuk) {
-        return redirect()->back()->with('error', 'Surat Masuk tidak ditemukan');
+        if (!$suratmasuk) {
+            return redirect()->back()->with('error', 'Surat Masuk tidak ditemukan');
+        }
+
+        $tglSuratMasuk = $suratmasuk->tglSuratMasuk;
+        $file = $suratmasuk->fileSuratMasuk;
+
+        $filePath = 'Surat-Masuk/' . $tglSuratMasuk . '/' . $file;
+
+        return view('form.edit-surat-masuk', compact('suratmasuk', 'filePath'));
     }
 
-    // Ambil tanggal surat masuk dari database (pastikan field ini ada di model SuratMasuk)
-    $tglSuratMasuk = $suratmasuk->tglSuratMasuk;
-    $file = $suratmasuk->fileSuratMasuk;
-
-    // Buat jalur lengkap ke file PDF (file_path di database hanya berisi nama file)
-    $filePath = 'Surat-Masuk/' . $tglSuratMasuk . '/' . $file;
-
-    return view('form.edit-surat-masuk', compact('suratmasuk', 'filePath'));
-}
-
-    public function updateSuratMasuk($id, Request $request)
+    public function updateSuratMasuk($slug, Request $request)
     {
-        $fileName = 'Berkas_Edit_' . $request->asalSuratMasuk . '_' . $request->tglSuratMasuk . '.pdf';
-        $filePath = $request->file('fileSuratMasuk')->storeAs('Surat-Masuk/' . $request->tglSuratMasuk, $fileName);
+        // $file = SuratMasuk::where('slug', $slug)->first();
+        $file = SuratMasuk::findOrFail($slug);
 
-        $suratmasuk = SuratMasuk::find($id)->update([
+        if ($request->hasFile('fileSuratMasuk')) {
+            $fileName = 'Berkas_Edit_' . $request->asalSuratMasuk . '_' . $request->tglSuratMasuk . '.pdf';
+            $filePath = $request->file('fileSuratMasuk')->storeAs('Surat-Masuk/' . $request->tglSuratMasuk, $fileName);
+        } else {
+            $filePath = $file->fileSuratMasuk;
+        }
+
+        $Newslug = Str::slug($request->noSurat . '-' . $request->perihal);
+
+        $count = SuratMasuk::where('slug', 'LIKE', "{$Newslug}%")->count();
+        $Newslug = $count ? "{$Newslug}-{$count}" : $Newslug;
+
+        $suratmasuk = SuratMasuk::findOrFail($slug)->update([
             'asalSuratMasuk' => request('asalSuratMasuk'),
             'noSurat' => request('noSurat'),
             'perihal' => request('perihal'),
             'isiRingkas' => request('isiRingkas'),
             'tglSuratMasuk' => request('tglSuratMasuk'),
             'fileSuratMasuk' => $filePath,
+            'slug' => $Newslug,
         ]);
 
         if ($suratmasuk) {
@@ -82,27 +101,39 @@ class SuratMasukController extends Controller
         }
     }
 
-    public function showPDF($id)
-{
-    $suratmasuk = SuratMasuk::find($id);
+    public function showPDF($slug)
+    {
+        $suratmasuk = SuratMasuk::findOrFail($slug);
 
-    if (!$suratmasuk) {
-        return redirect()->back()->with('error', 'Surat Masuk tidak ditemukan');
+        if (!$suratmasuk) {
+            return redirect()->back()->with('error', 'Surat Masuk tidak ditemukan');
+        }
+
+        // Ambil tanggal surat masuk dan nama file dari database
+        $tglSuratMasuk = $suratmasuk->tglSuratMasuk;
+        $filePath = $suratmasuk->fileSuratMasuk;
+
+        // Bangun path lengkap ke file di dalam storage private
+        $fullPath = storage_path('app/private/' . $filePath);
+
+        // Cek apakah file ada
+        if (!file_exists($fullPath)) {
+            abort(404, 'File tidak ditemukan.');
+        }
+
+        // Tampilkan file PDF di browser
+        return response()->file($fullPath);
     }
 
-    // Ambil tanggal surat masuk dan nama file dari database
-    $tglSuratMasuk = $suratmasuk->tglSuratMasuk;
-    $filePath = $suratmasuk->fileSuratMasuk;
+    public function viewSuratMasuk($slug)
+    {
+        $suratmasuk = SuratMasuk::where('slug', $slug)->first();
 
-    // Bangun path lengkap ke file di dalam storage private
-    $fullPath = storage_path('app/private/' . $filePath);
+        $tglSuratMasuk = $suratmasuk->tglSuratMasuk;
+        $file = $suratmasuk->fileSuratMasuk;
 
-    // Cek apakah file ada
-    if (!file_exists($fullPath)) {
-        abort(404, 'File tidak ditemukan.');
+        $filePath = 'Surat-Masuk/' . $tglSuratMasuk . '/' . $file;
+
+        return view('lihat-surat-masuk', compact('suratmasuk', 'filePath'));
     }
-
-    // Tampilkan file PDF di browser
-    return response()->file($fullPath);
-}
 }

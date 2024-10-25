@@ -68,7 +68,7 @@
                             Jumlah Surat Masuk
                         </p>
                         <p class="text-sm md:text-lg text-black text-center font-bold">
-                            x
+                            {{ $TotalSuratMasuk }}
                         </p>
                     </div>
                     <div class="h-full w-full border-r-2 border-black dark:border-white bg-red-300">

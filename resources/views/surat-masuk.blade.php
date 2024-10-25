@@ -50,17 +50,17 @@
                         <td class="px-3 text-center"> {{ $data->tglSuratMasuk }} </td>
                         <td class="text-center">
                             @if (Auth::user()->roles == 'Super Admin')
-                                <a href=""
+                                <a href="{{ route('viewSuratMasuk', $data->slug) }}"
                                     class="bg-blue-400 px-4 rounded-xl mx-2 text-white font-semibold hover:bg-blue-600">
                                     Lihat
                                 </a>
                                 <br>
-                                <a href="{{ route('EditSuratMasuk', $data->id) }}"
+                                <a href="{{ route('EditSuratMasuk', $data->slug) }}"
                                     class="bg-yellow-400 px-5 rounded-xl mx-2 text-white font-semibold hover:bg-yellow-600">
                                     Edit
                                 </a>
                                 <br>
-                                <form action="{{ route('DeleteSuratMasuk', $data->id) }}" method="POST">
+                                <form action="{{ route('DeleteSuratMasuk', $data->slug) }}" method="POST">
                                     @csrf
                                     <button type="submit"
                                         class="bg-red-500 px-3 rounded-xl mx-2 text-white font-semibold hover:bg-red-700">

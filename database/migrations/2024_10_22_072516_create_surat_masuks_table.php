@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('asalSuratMasuk');
             $table->string('noSurat');
+            $table->string('tipeSurat')->default('Surat Masuk');
             $table->string('perihal');
             $table->string('isiRingkas');
             $table->date('tglSuratMasuk');
             $table->string('fileSuratMasuk');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

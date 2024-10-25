@@ -9,7 +9,10 @@ class DefaultController extends Controller
 {
     public function dashboard()
     {
-        return view('dashboard');
+        $TotalSuratMasuk = SuratMasuk::where('tipeSurat', 'Surat Masuk')->count();
+        return view('dashboard',[
+            'TotalSuratMasuk' => $TotalSuratMasuk,
+        ]);
     }
 
     public function suratmasuk()
