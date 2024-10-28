@@ -45,7 +45,6 @@
                     <tr class="border-b-2 border-black">
                         <td class="px-3 text-center">{{ $data->noSurat }}</td>
                         <td class="px-3 text-center"> {{ $data->asalSuratMasuk }} </td>
-                        {{-- <td class="px-3 text-justify">{{ Str::limit($data->perihal, 50) }}</td> --}}
                         <td class="px-3 text-justify">{{ $data->perihal }}</td>
                         <td class="px-3 text-center"> {{ $data->tglSuratMasuk }} </td>
                         <td class="text-center">

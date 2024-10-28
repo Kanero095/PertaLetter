@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     <div class="mt-3 ml-5">
-        <a href="{{ route('suratmasuk') }}"
+        <a href="{{ route('suratkeluar') }}"
             class="px-3 py-1 bg-orange-400 rounded-3xl font-semibold hover:bg-orange-700 hover:font-bold hover:text-white">
             Back
         </a>
@@ -14,14 +14,14 @@
         <p class="text-center text-2xl font-bold mb-5">
             Edit Surat Masuk
         </p>
-        <form action="{{ route('updateSuratMasuk', $suratmasuk->id) }}" method="POST" enctype="multipart/form-data"
+        <form action="{{ route('updateSuratKeluar', $suratkeluar->id) }}" method="POST" enctype="multipart/form-data"
             autocomplete="off">
             @csrf
             <div class="relative z-0 w-full mb-5 group">
-                <input type="text" name="asalSuratMasuk" id="asalSuratMasuk"
+                <input type="text" name="tujuanSuratKeluar" id="tujuanSuratKeluar"
                     class="block py-2.5 px-0 w-full text-sm text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    value="{{ $suratmasuk->asalSuratMasuk }}" />
-                <label for="asalSuratMasuk"
+                    value="{{ $suratkeluar->tujuanSuratKeluar }}" />
+                <label for="tujuanSuratKeluar"
                     class="peer-focus:font-medium absolute text-sm text-black dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Asal
                     Surat Masuk</label>
                 @error('asalSuratMasuk')
@@ -31,7 +31,7 @@
             <div class="relative z-0 w-full mb-5 group">
                 <input type="text" name="noSurat" id="noSurat"
                     class="block py-2.5 px-0 w-full text-sm text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    value="{{ $suratmasuk->noSurat }}" />
+                    value="{{ $suratkeluar->noSurat }}" />
                 <label for="noSurat"
                     class="peer-focus:font-medium absolute text-sm text-black dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nomor
                     Surat Masuk</label>
@@ -39,43 +39,43 @@
             <div class="relative z-0 w-full mb-5 group">
                 <input type="text" name="perihal" id="perihal"
                     class="block py-2.5 px-0 w-full text-sm text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    value="{{ $suratmasuk->perihal }}" />
+                    value="{{ $suratkeluar->perihal }}" />
                 <label for="perihal"
                     class="peer-focus:font-medium absolute text-sm text-black dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Perihal
                     Surat Masuk</label>
             </div>
             <div class="relative z-0 w-full mb-5 group">
                 <textarea type="text" name="isiRingkas" id="isiRingkas"
-                    class="block py-2.5 px-0 h-12 w-full text-sm text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">{{ $suratmasuk->isiRingkas }}</textarea>
+                    class="block py-2.5 px-0 h-12 w-full text-sm text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">{{ $suratkeluar->isiRingkas }}</textarea>
                 <label for="isiRingkas"
                     class="peer-focus:font-medium absolute text-sm text-black dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Isi
                     Ringkas Surat Masuk</label>
             </div>
             <div class="relative z-0 w-full mb-5 group">
-                <input type="date" name="tglSuratMasuk" id="tglSuratMasuk"
+                <input type="date" name="tglSuratKeluar" id="tglSuratKeluar"
                     class="block py-2.5 px-0 w-full text-sm text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    value="{{ $suratmasuk->tglSuratMasuk }}" />
+                    value="{{ $suratkeluar->tglSuratKeluar }}" />
                 <label for="tglSuratMasuk"
                     class="peer-focus:font-medium absolute text-sm text-black dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Tanggal
                     Surat Masuk</label>
             </div>
             <div class="relative z-0 w-full mb-5 group">
-                <input type="file" name="fileSuratMasuk" id="fileSuratMasuk" accept=".pdf"
+                <input type="file" name="fileSuratKeluar" id="fileSuratKeluar" accept=".pdf"
                     class="block py-2.5 px-0 w-full text-sm text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
-                <label for="fileSuratMasuk"
+                <label for="fileSuratKeluar"
                     class="peer-focus:font-medium absolute text-sm text-black dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">File
                     Surat Masuk</label>
             </div>
 
             @if ($filePath)
                 <div class="mt-4">
-                    <label for="existingFile" class="block text-sm font-medium text-gray-700">File Surat Masuk Saat
+                    <label for="existingFile" class="block text-sm font-medium text-gray-700">File Surat Keluar Saat
                         Ini:</label>
-                    <a href="{{ route('pdf.show', $suratmasuk->id) }}" target="_blank"
+                    <a href="{{ route('pdf.show', $suratkeluar->id) }}" target="_blank"
                         class="text-blue-600 hover:underline">Lihat File PDF</a>
 
                     <!-- Jika ingin pratinjau file PDF langsung -->
-                    <iframe src="{{ route('pdf.show', $suratmasuk->id) }}" width="100%" height="500px"
+                    <iframe src="{{ route('pdf.show', $suratkeluar->id) }}" width="100%" height="500px"
                         class="rounded"></iframe>
                 </div>
             @else

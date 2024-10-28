@@ -76,7 +76,7 @@
                             Jumlah Surat Keluar
                         </p>
                         <p class="text-sm md:text-lg text-black text-center font-bold">
-                            x
+                            {{ $TotalSuratKeluar }}
                         </p>
                     </div>
                     <div class="h-full w-full border-r-2 border-black dark:border-white bg-blue-300">
@@ -84,7 +84,7 @@
                             Jumlah Disposisi
                         </p>
                         <p class="text-sm md:text-lg text-black text-center font-bold">
-                            x
+                            0
                         </p>
                     </div>
                     <div class="h-full w-full bg-lime-400">

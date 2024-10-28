@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\SuratMasukController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +32,14 @@ Route::middleware([
 
     Route::get('/tambah/surat-masuk',[SuratMasukController::class, 'TambahsuratMasuk'])->name('Tambah-Surat-Masuk');
     Route::post('/tambah/surat-masuk',[SuratMasukController::class, 'SuratMasuk'])->name('Tambahkan-Surat-Masuk');
+
+    Route::get('/tambah/surat-keluar',[SuratKeluarController::class, 'TambahSuratKeluar'])->name('Tambah-Surat-Keluar');
+    Route::post('/tambah/surat-keluar',[SuratKeluarController::class, 'SuratKeluar'])->name('Tambahkan-Surat-Keluar');
+    Route::post('/surat-keluar/{slug}',[SuratKeluarController::class, 'DeleteSuratKeluar'])->name('DeleteSuratKeluar');
+    Route::get('/surat-keluar/edit/{slug}/',[SuratKeluarController::class, 'editSuratKeluar'])->name('EditSuratKeluar');
+    Route::get('/suratkeluar/pdf/{slug}', [SuratKeluarController::class, 'showPDF'])->name('pdf.show');
+    Route::post('/surat-keluar/edit/{slug}/',[SuratKeluarController::class, 'updateSuratKeluar'])->name('updateSuratKeluar');
+    Route::get('/surat-keluar/view/{slug}', [SuratKeluarController::class,'viewSuratKeluar'])->name('viewSuratKeluar');
+
+    Route::get('/surat-disposisi', [DefaultController::class,'suratdisposisi'])->name('suratdisposisi');
 });

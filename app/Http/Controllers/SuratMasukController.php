@@ -32,7 +32,7 @@ class SuratMasukController extends Controller
         $suratmasuk->isiRingkas = $request->isiRingkas;
         $suratmasuk->tglSuratMasuk = $request->tglSuratMasuk;
 
-        $slug = Str::slug($request->noSurat . '-' . $request->perihal);
+        $slug = Str::slug($request->noSurat . '-' . $request->perihal. '-' . Str::random(10));
 
         $count = SuratMasuk::where('slug', 'LIKE', "{$slug}%")->count();
         $slug = $count ? "{$slug}-{$count}" : $slug;

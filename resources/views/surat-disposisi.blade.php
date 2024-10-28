@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Surat Keluar') }}
+            {{ __('Surat Disposisi') }}
         </h2>
     </x-slot>
 
@@ -33,7 +33,7 @@
                         Perihal
                     </th>
                     <th class="px-4 w-40">
-                        Tanggal Surat Keluar Dibuat
+                        Tanggal Surat Disposisi Dibuat
                     </th>
                     <th class="px-4 w-40">
                         Aksi
@@ -41,7 +41,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($suratkeluar as $data)
+                {{-- @foreach ($suratkeluar as $data)
                     <tr class="border-b-2 border-black">
                         <td class="px-3 text-center">{{ $data->noSurat }}</td>
                         <td class="px-3 text-center"> {{ $data->tujuanSuratKeluar }} </td>
@@ -79,7 +79,7 @@
                             @endif
                         </td>
                     </tr>
-                @endforeach
+                @endforeach --}}
             </tbody>
         </table>
     </div>
