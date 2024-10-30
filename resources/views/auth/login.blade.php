@@ -1,3 +1,6 @@
+@php
+    use Illuminate\Support\Facades\Route;
+@endphp
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">

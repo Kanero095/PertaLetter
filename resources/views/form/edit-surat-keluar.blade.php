@@ -71,11 +71,11 @@
                 <div class="mt-4">
                     <label for="existingFile" class="block text-sm font-medium text-gray-700">File Surat Keluar Saat
                         Ini:</label>
-                    <a href="{{ route('pdf.show', $suratkeluar->id) }}" target="_blank"
+                    <a href="{{ route('pdf.showKeluar', $suratkeluar->id) }}" target="_blank"
                         class="text-blue-600 hover:underline">Lihat File PDF</a>
 
                     <!-- Jika ingin pratinjau file PDF langsung -->
-                    <iframe src="{{ route('pdf.show', $suratkeluar->id) }}" width="100%" height="500px"
+                    <iframe src="{{ route('pdf.showKeluar', $suratkeluar->id) }}" width="100%" height="500px"
                         class="rounded"></iframe>
                 </div>
             @else

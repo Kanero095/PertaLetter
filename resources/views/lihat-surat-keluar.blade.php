@@ -61,8 +61,8 @@
                                     Keluar Saat
                                     Ini:</label>
 
-                                <iframe src="{{ route('pdf.show', $suratkeluar->id) }}" width="100%" height="650px"
-                                    class="rounded"></iframe>
+                                <iframe src="{{ route('pdf.showKeluar', $suratkeluar->id) }}" width="100%"
+                                    height="650px" class="rounded"></iframe>
                             </div>
                         @else
                             <p class="text-red-600">File tidak ditemukan</p>

@@ -60,7 +60,7 @@ class SuratKeluarController extends Controller
         return view('form.edit-surat-keluar', compact('suratkeluar', 'filePath'));
     }
 
-    public function showPDF($slug)
+    public function showPDFKeluar($slug)
     {
         $suratkeluar = SuratKeluar::findOrFail($slug);
 

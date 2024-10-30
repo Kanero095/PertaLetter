@@ -13,7 +13,7 @@
     @endif
 
     <div class="p-5">
-        <a href="{{ route('Tambah-Surat-Keluar') }}"
+        <a href="{{ route('tambah') }}"
             class="w-32 h-2 p-2 rounded bg-lime-500 font-bold text-white drop-shadow hover:bg-lime-700">
             + Tambah Data
         </a>
