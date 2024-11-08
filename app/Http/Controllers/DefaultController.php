@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Disposisi;
 use App\Models\SuratKeluar;
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
@@ -12,9 +13,11 @@ class DefaultController extends Controller
     {
         $TotalSuratMasuk = SuratMasuk::where('tipeSurat', 'Surat Masuk')->count();
         $TotalSuratKeluar = SuratKeluar::where('tipeSurat', 'Surat Keluar')->count();
+        $TotalSuratDisposisi = Disposisi::all()->count();
         return view('dashboard',[
             'TotalSuratMasuk' => $TotalSuratMasuk,
             'TotalSuratKeluar'=> $TotalSuratKeluar,
+            'TotalSuratDisposisi' => $TotalSuratDisposisi
         ]);
     }
 
@@ -32,6 +35,7 @@ class DefaultController extends Controller
 
     public function suratdisposisi()
     {
-        return view('surat-disposisi');
+        $suratdisposisi = Disposisi::all();
+        return view('surat-disposisi', ['suratdisposisi' => $suratdisposisi]);
     }
 }

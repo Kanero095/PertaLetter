@@ -172,6 +172,15 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('suratmasuk') }}" :active="request()->routeIs('suratmasuk')">
+                {{ __('Surat Masuk') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('suratkeluar') }}" :active="request()->routeIs('suratkeluar')">
+                {{ __('Surat Keluar') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('suratdisposisi') }}" :active="request()->routeIs('suratdisposisi')">
+                {{ __('Surat Disposisi') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

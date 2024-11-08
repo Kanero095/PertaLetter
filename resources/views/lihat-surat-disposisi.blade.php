@@ -7,7 +7,7 @@
 <x-app-layout>
 
     <div class="mt-3 ml-5">
-        <a href="{{ route('suratkeluar') }}"
+        <a href="{{ route('suratdisposisi') }}"
             class="px-3 py-1 bg-orange-400 rounded-3xl font-semibold hover:bg-orange-700 hover:font-bold hover:text-white">
             Back
         </a>
@@ -17,30 +17,30 @@
         <div class="bg-white px-7 py-3 rounded-xl">
             <table class="w-full mx-auto">
                 <p class="text-2xl font-bold text-center mt-2 mb-3 underline">
-                    SURAT KELUAR
+                    SURAT DISPOSISI
                 </p>
                 <tr class="border-b">
                     <td class="w-60 font-semibold">
-                        Tujuan Surat Keluar
+                        Tujuan Surat Disposisi
                     </td>
                     <td>
-                        : {{ $suratkeluar->tujuanSuratKeluar }}
+                        : {{ $disposisi->kepada }}
                     </td>
                 </tr>
                 <tr class="border-b">
                     <td class="w-60 font-semibold">
-                        Nomor Surat Keluar
+                        Nomor Surat Disposisi
                     </td>
                     <td>
-                        : {{ $suratkeluar->noSurat }}
+                        : {{ $disposisi->noSuratDisposisi }}
                     </td>
                 </tr>
                 <tr class="border-b">
                     <td class="w-60 font-semibold">
-                        Tanggal Surat Keluar
+                        Tanggal Surat Disposisi dibuat
                     </td>
                     <td>
-                        : {{ Carbon::parse($suratkeluar->tglSuratKeluar)->translatedFormat('d F Y') }}
+                        : {{ Carbon::parse($disposisi->tgldisposisi)->translatedFormat('d F Y') }}
                     </td>
                 </tr>
                 <tr class="border-b">
@@ -48,15 +48,7 @@
                         Perihal Surat
                     </td>
                     <td>
-                        : {{ $suratkeluar->perihal }}
-                    </td>
-                </tr>
-                <tr class="border-b">
-                    <td class="w-60 font-semibold">
-                        Isi Ringkasan Surat Keluar
-                    </td>
-                    <td>
-                        : {{ $suratkeluar->isiRingkas }}
+                        : {{ $disposisi->perihal }}
                     </td>
                 </tr>
                 <tr>
@@ -64,10 +56,10 @@
                         @if ($filePath)
                             <div class="mt-4">
                                 <label for="existingFile" class="block text-sm font-medium text-gray-700">File Surat
-                                    Keluar Saat
-                                    Ini:</label>
+                                    Disposisi Saat Ini:
+                                </label>
 
-                                <iframe src="{{ route('pdf.showKeluar', $suratkeluar->id) }}" width="100%"
+                                <iframe src="{{ route('pdf.showDisposisi', $disposisi->slug) }}" width="100%"
                                     height="650px" class="rounded"></iframe>
                             </div>
                         @else

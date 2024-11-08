@@ -45,4 +45,6 @@ Route::middleware([
     Route::get('/surat-disposisi', [DefaultController::class,'suratdisposisi'])->name('suratdisposisi');
     Route::get('/tambah/surat-disposisi', [DisposisiController::class, 'tambah'])->name('tambah');
     Route::post('/tambah/surat-disposisi', [DisposisiController::class, 'generate'])->name('generate-disposisi');
+    Route::get('/suratdisposisi/pdf/{slug}', [DisposisiController::class, 'disposisi'])->name('pdf.showDisposisi');
+    Route::get('/surat-disposisi/view/{slug}',[DisposisiController::class, 'viewDisposisi'])->name('viewSuratDisposisi');
 });

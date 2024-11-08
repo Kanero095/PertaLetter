@@ -25,6 +25,9 @@ class Disposisi extends Model
         'ditempatkan',
         'tglMulai',
         'tglBerakhir',
+        'file_name',
+        'file_path',
+        'fileDisposisi',
         'slug'
     ];
 }

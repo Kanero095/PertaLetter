@@ -1,6 +1,8 @@
 @php
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Route;
+    use Carbon\Carbon;
+    Carbon::setLocale('id');
 @endphp
 <x-app-layout>
     <x-slot name="header">
@@ -50,7 +52,9 @@
                         <td class="px-3 text-center">{{ $data->noSurat }}</td>
                         <td class="px-3 text-center"> {{ $data->tujuanSuratKeluar }} </td>
                         <td class="px-3 text-justify">{{ $data->perihal }}</td>
-                        <td class="px-3 text-center"> {{ $data->tglSuratKeluar }} </td>
+                        <td class="px-3 text-center">
+                            {{ Carbon::parse($data->tglSuratKeluar)->translatedFormat('d F Y') }}
+                        </td>
                         <td class="text-center">
                             @if (Auth::user()->roles == 'Super Admin')
                                 <a href="{{ route('viewSuratKeluar', $data->slug) }}"

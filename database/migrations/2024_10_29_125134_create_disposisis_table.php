@@ -28,6 +28,9 @@ return new class extends Migration
             $table->string('ditempatkan');
             $table->date('tglMulai');
             $table->date('tglBerakhir');
+            $table->string('file_name');
+            $table->string('file_path');
+            $table->string('fileDisposisi');
             $table->string('slug')->unique();
             $table->timestamps();
         });

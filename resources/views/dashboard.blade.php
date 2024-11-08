@@ -1,5 +1,6 @@
 @php
     use Illuminate\Support\Facades\Auth;
+    use Illuminate\Support\Facades\Route;
 @endphp
 <x-app-layout>
     <x-slot name="header">
@@ -60,7 +61,7 @@
             </div>
         </div>
     </div>
-
+    `
     <div class="mt-3">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -87,7 +88,7 @@
                             Jumlah Disposisi
                         </p>
                         <p class="text-sm md:text-lg text-black text-center font-bold">
-                            0
+                            {{ $TotalSuratDisposisi }}
                         </p>
                     </div>
                     <div class="h-full w-full bg-lime-400">

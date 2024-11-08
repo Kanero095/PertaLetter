@@ -1,3 +1,9 @@
+@php
+    use Illuminate\Support\Facades\Auth;
+    use Illuminate\Support\Facades\Route;
+    use Carbon\Carbon;
+    Carbon::setLocale('id');
+@endphp
 <x-app-layout>
 
     <div class="mt-3 ml-5">
@@ -34,7 +40,7 @@
                         Tanggal
                     </td>
                     <td>
-                        : {{ $suratmasuk->tglSuratMasuk }}
+                        : {{ Carbon::parse($suratmasuk->tglSuratMasuk)->translatedFormat('d F Y') }}
                     </td>
                 </tr>
                 <tr class="border-b">

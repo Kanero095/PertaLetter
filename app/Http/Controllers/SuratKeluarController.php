@@ -122,5 +122,6 @@ class SuratKeluarController extends Controller
         $filePath = 'Surat-Keluar/' . $tglSuratKeluar . '/' . $file;
 
         return view('lihat-surat-keluar', compact('suratkeluar', 'filePath'));
+        // return dd($filePath);
     }
 }
