@@ -109,19 +109,15 @@ class SuratMasukController extends Controller
             return redirect()->back()->with('error', 'Surat Masuk tidak ditemukan');
         }
 
-        // Ambil tanggal surat masuk dan nama file dari database
         $tglSuratMasuk = $suratmasuk->tglSuratMasuk;
         $filePath = $suratmasuk->fileSuratMasuk;
 
-        // Bangun path lengkap ke file di dalam storage private
         $fullPath = storage_path('app/private/' . $filePath);
 
-        // Cek apakah file ada
         if (!file_exists($fullPath)) {
             abort(404, 'File tidak ditemukan.');
         }
 
-        // Tampilkan file PDF di browser
         return response()->file($fullPath);
     }
 

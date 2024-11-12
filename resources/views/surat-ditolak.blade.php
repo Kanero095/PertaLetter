@@ -7,7 +7,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Surat Masuk') }}
+            {{ __('Surat Ditolak') }}
         </h2>
     </x-slot>
 
@@ -19,7 +19,7 @@
     @endif
 
     <div class="p-5">
-        <a href="{{ route('Tambah-Surat-Masuk') }}"
+        <a href="{{ route('tambah-surat-ditolak') }}"
             class="w-32 h-2 p-2 rounded bg-lime-500 font-bold text-white drop-shadow hover:bg-lime-700">
             + Tambah Data
         </a>
@@ -39,7 +39,10 @@
                         Perihal
                     </th>
                     <th class="px-4 w-40">
-                        Tanggal Surat Masuk
+                        Tanggal Masuk Surat Ditolak
+                    </th>
+                    <th>
+                        Alasan Surat Ditolak
                     </th>
                     <th class="px-4 w-40">
                         Aksi
@@ -47,27 +50,28 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($suratmasuk as $data)
+                @foreach ($suratditolak as $data)
                     <tr class="border-b-2 border-black">
                         <td class="px-3 text-center">{{ $data->noSurat }}</td>
-                        <td class="px-3 text-center"> {{ $data->asalSuratMasuk }} </td>
+                        <td class="px-3 text-center"> {{ $data->asalSurat }} </td>
                         <td class="px-3 text-justify">{{ $data->perihal }}</td>
                         <td class="px-3 text-center">
-                            {{ Carbon::parse($data->tglSuratMasuk)->translatedFormat('d F Y') }}
+                            {{ Carbon::parse($data->tglMasukSuratDitolak)->translatedFormat('d F Y') }}
                         </td>
+                        <td class="px-3 text-justify">{{ $data->alasan }}</td>
                         <td class="text-center">
                             @if (Auth::user()->roles == 'Super Admin')
-                                <a href="{{ route('viewSuratMasuk', $data->slug) }}"
+                                <a href="{{ route('ViewSuratDitolak', $data->slug) }}"
                                     class="bg-blue-400 px-4 rounded-xl mx-2 text-white font-semibold hover:bg-blue-600">
                                     Lihat
                                 </a>
                                 <br>
-                                <a href="{{ route('EditSuratMasuk', $data->slug) }}"
+                                <a href="{{ route('EditSuraDitolak', $data->slug) }}"
                                     class="bg-yellow-400 px-5 rounded-xl mx-2 text-white font-semibold hover:bg-yellow-600">
                                     Edit
                                 </a>
                                 <br>
-                                <form action="{{ route('DeleteSuratMasuk', $data->slug) }}" method="POST">
+                                <form action="{{ route('DeleteSuratDitolak', $data->slug) }}" method="POST">
                                     @csrf
                                     <button type="submit"
                                         class="bg-red-500 px-3 rounded-xl mx-2 text-white font-semibold hover:bg-red-700">

@@ -62,11 +62,11 @@
         </div>
     </div>
     `
-    <div class="mt-3">
+    <div class="mt-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white overflow-auto shadow-xl sm:rounded-lg">
                 {{-- content --}}
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 justify-center h-80 lg:h-48 rounded">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 justify-center h-80 lg:h-48 rounded">
                     <div class="h-full item-center w-full border-r-2 border-black dark:border-white bg-orange-400">
                         <p class="text-sm md:text-lg text-black text-center font-bold mt-16">
                             Jumlah Surat Masuk
@@ -81,6 +81,14 @@
                         </p>
                         <p class="text-sm md:text-lg text-black text-center font-bold">
                             {{ $TotalSuratKeluar }}
+                        </p>
+                    </div>
+                    <div class="h-full w-full border-r-2 border-black dark:border-white bg-blue-300">
+                        <p class="text-sm md:text-lg text-black text-center font-bold mt-16">
+                            Jumlah Surat Ditolak
+                        </p>
+                        <p class="text-sm md:text-lg text-black text-center font-bold">
+                            {{ $TotalSuratDitolak }}
                         </p>
                     </div>
                     <div class="h-full w-full border-r-2 border-black dark:border-white bg-blue-300">
@@ -103,4 +111,67 @@
             </div>
         </div>
     </div>
+
+    <div class="mt-5 mb-1">
+        <div class="w-full sm:px-6 lg:px-8">
+            <div class="bg-white px-4 lg:px-10 shadow-xl sm:rounded-lg">
+                <div class="font-extrabold text-center py-5">
+                    <p class="text-2xl">DATA PERARSIPAN SURAT PERTAMINA</p>
+                    <p class="text-xl">TAHUN {{ $tahun }}</p>
+                    <p class="text-base">Alamat : Jl. Plaju no.38 Komperta Pendopo, Talang Ubi Kab Penukal Abab Lematang
+                        Ilir (PALI) Sumatra Selatan 31211.</p>
+                </div>
+                <canvas id="suratChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('suratChart').getContext('2d');
+
+        const data = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Des'],
+            datasets: [{
+                    label: 'Surat Masuk',
+                    data: @json(array_values($suratMasukPerBulan)),
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Surat Keluar',
+                    data: @json(array_values($suratKeluarPerBulan)),
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Surat Disposisi',
+                    data: @json(array_values($disposisiPerBulan)),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Surat Ditolak',
+                    data: @json(array_values($suratDitolakPerBulan)),
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        const suratChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 </x-app-layout>

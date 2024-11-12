@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\DisposisiController;
+use App\Http\Controllers\SuratDitolakController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\SuratMasukController;
 use Illuminate\Support\Facades\Route;
@@ -47,4 +48,13 @@ Route::middleware([
     Route::post('/tambah/surat-disposisi', [DisposisiController::class, 'generate'])->name('generate-disposisi');
     Route::get('/suratdisposisi/pdf/{slug}', [DisposisiController::class, 'disposisi'])->name('pdf.showDisposisi');
     Route::get('/surat-disposisi/view/{slug}',[DisposisiController::class, 'viewDisposisi'])->name('viewSuratDisposisi');
+
+    Route::get('/surat-ditolak', [DefaultController::class, 'suratditolak'])->name('suratditolak');
+    Route::get('/tambah/surat-ditolak',[SuratDitolakController::class, 'TambahSuratDitolak'])->name('tambah-surat-ditolak');
+    Route::post('tambah/surat-ditolak', [SuratDitolakController::class, 'tambahkanSuratDitolak'])->name('tambahkan-surat-ditolak');
+    Route::post('/surat-ditolak/{slug}', [SuratDitolakController::class, 'DeleteSuratDitolak'])->name('DeleteSuratDitolak');
+    Route::get('surat-ditolak/pdf/{slug}', [SuratDitolakController::class, 'showPDFDitolak'])->name('pdf.ShowDitolak');
+    Route::get('/surat-ditolak/view/{slug}', [SuratDitolakController::class, 'ViewSuratDitolak'])->name('ViewSuratDitolak');
+    Route::get('/surat-ditolak/edit/{slug}', [SuratDitolakController::class, 'EditSuratDitolak'])->name('EditSuraDitolak');
+    Route::post('/surat-ditolak/edit/{slug}', [SuratDitolakController::class, 'updateSuratDitolak'])->name('UpdateSuraDitolak');
 });
